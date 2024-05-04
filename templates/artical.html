@@ -1,0 +1,272 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden;">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/article.css' %}">
+      <link type="image/png" sizes="120x120" rel="icon" href="{% static 'image/article.ico' %}">
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+      <!-- Font Awesome CSS (optional) -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <style>
+         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+         .navbar{
+         background-color: #020202 !important; 
+         width:100vw;
+         }
+         .navbar-brand a {
+         font-family: 'Poppins', 'Times New Roman', Times, serif;
+         font-size: 20px;
+         font-weight: bold;
+         
+
+         /* Additional styles for the navbar brand */
+         }
+         .navbar-nav .nav-link {
+         font-family: 'Poppins', sans-serif;
+         font-weight: bold;
+         margin-left: 10vw;
+         color: rgb(255, 255, 255);
+
+         /* Additional styles for the navbar links */
+         }
+         body{
+         background-color: rgb(255, 255, 255);
+         overflow-x: hidden;
+         padding-bottom: 10vh;
+         }
+         @media only screen and (max-width: 1130px){
+            .navbar{
+               width:100vw;
+            }
+            body{
+                        overflow-x: hidden;
+
+            }
+         }
+      </style>
+      <title>Article | BlogVerse</title>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: red;width: 100vw;">
+         <div class="container-fluid">
+            <a class="navbar-brand navbar_brand" href="{% url 'homes' %}"><h1 STYLE="color: aliceblue;"><span class="logo-text">𝔑𝔢𝔴 ℜ𝔬𝔬𝔱𝔰<br>
+               𝔖𝔦𝔰𝔱𝔢𝔯𝔥𝔬𝔬𝔡 𝔉𝔢𝔪𝔦𝔫𝔦𝔰𝔪 𝔬𝔣 𝔱𝔥𝔢 ℑ𝔫𝔡𝔦𝔢-𝔓𝔬𝔭
+           </span></h1></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse bar_icon_navbar" id="navbarText">
+               <ul class="navbar-nav mb-2 mb-lg-0">
+                  <li class="nav-item">
+                     <a class="nav-link active" aria-current="page" href="{% url 'homes' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'the_about' %}">Contact Us</a>
+                  </li>
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'the_dashb' %}">Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                     <a href="#" class="nav-link">Authentication</a>
+                  </li>
+                  {% endif %}
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <!-- Jumbotron -->
+      <header >
+         <!-- Intro settings -->
+         <!-- Jumbotron -->
+         <div id="intro" class="article_title">
+            <h1 class="mb-0 h4">{{ content.title }} </h1>
+         </div>
+         <!-- Jumbotron -->
+      </header>
+      <!--Main Navigation-->
+      <!--Main layout-->
+      <main class="main " >
+         <div class="container container-content ">
+            <!--Grid row-->
+            <!-- <div class="row"> -->
+               <!--Grid column-->
+               <div class="blog_part">
+                  <!--Section: Post data-mdb-->
+                  <section class="imageanduploader">
+                     <img src="{{content.picture.url}}"
+                        class="article-image" alt="" />
+                     <div class="uploader-info">
+                        <div class=" text-center text-lg-start mb-3 m-lg-0">
+                           <img src="{{ user_profile.profile_picture.url }}" class="rounded-5 shadow-1-strong me-2 "
+                              height="35" alt="" loading="lazy" />
+                           <span> Published <u>{{ content.uploaded_at }}</u> by</span>
+                           <a href="" class="text-dark">{{ content.user }}</a>
+                           <p>Views : {{content.views}} | {{read}} Read</p>
+                        </div>
+                     </div>
+                  </section>
+                  <!--Section: Post data-mdb-->
+                  <!--Section: Text-->
+                  <section class="content_box">
+                     <div class="content_text">
+                        {{ content.descript|safe }}
+                     </div>
+                   <!--  <img src="{{content.picture.url}}" class="img-fluid shadow-1-strong rounded-5 mb-4" alt="" />-->
+                  </section>
+                  <!--Section: Text-->
+                  <!--Section: Share buttons-->
+                  <!--Section: Share buttons-->
+                  <!-- <section class="text-center border-top border-bottom py-4 mb-4">
+                     <p ><strong>Share Your FeedBack</strong></p>
+                     <div class="row">
+                        <div class="">
+                           <button type="button" class="btn btn-primary me-1">
+                           <i class="fas fa-comments me-2"></i>Add comment
+                           </button>
+                        </div>
+                        <div class="">
+                           <form id="likeForm" action="{% url 'artical' the_artical=content.slug %}" method="POST">
+                              {% csrf_token %}
+                              <input type="hidden" name="like_article" value="true">
+                              <button class="btn btn-success likeBtn" data-article-slug="{{ content.slug }}">
+                                  <i class="fas fa-thumbs-up me-2"></i>Like
+                              </button>
+                              <span class="text-success">{{ content.likes }}</span>
+                          </form>
+                       </div>
+                        <div class="">
+                           <form action="" method="POST">
+                              {% csrf_token %}
+                              <button type="button" class="btn btn-danger">
+                              <i class="fas fa-thumbs-down me-2"></i>Dislike
+                              </button>
+                              <span class="text-danger">{{ content.dislikes }}</span> 
+                           </form>
+                        </div>
+                     </div>
+                  </section> -->
+                  <!--Section: Share buttons-->
+                  <!--Section: Share buttons-->
+                  <!--Section: Author-->
+                  
+                  <!--Section: Author-->
+                  <!--Section: Comments-->
+                  <div class="comment_here">Comment Here</div>
+
+                  <section class="comment_form_section">
+                     
+
+                     <!-- Add comment form -->
+                     <form action="#" method="POST" enctype="multipart/form-data" class="form_comment">
+                      {% csrf_token %}
+                      <div class="mb-3">
+                        <label for="commenter_name" class="form-label">Your Name:</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="commenter_name" name="commenter_name" required>
+                          <!-- Other form fields -->
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="viewer_pic">Upload Picture</label>
+                        <div class="input-group">
+                          <input type="file" class="form-control" id="viewer_pic" name="viewer_pic" accept="image/*">
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="comment" class="form-label">Add a comment:</label>
+                        <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="subscribe" name="subscribe">
+                        <label class="form-check-label" for="subscribe">Subscribe to BlogVerse</label>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    </section>
+                    <!-- Comment -->
+                    <!-- <p class="text-center"><strong>Comments: {{comments.count}}</strong></p> -->
+                  <section class="comment_section">
+                    {% for data in comments %}
+                    <div class="comment_box">
+                       <div class="commenter_info">
+                          <img src="{{data.commenter_photo.url}}"
+                             class="uploader_img" alt="profilePic" />
+                             <p class="mb-2" style="margin-left: 1vw;"><strong>{{ data.commenter_name }}</strong> - {{data.created_at}}</p>
+
+                       </div>
+                       <div class="comment_text">
+                          <p>
+                             {{ data.comment }}
+                          </p>
+                       </div>
+                    </div>
+                    {% endfor %}
+                  </section>
+
+                  <!--Section: Comments-->
+                  <!--Section: Comments-->
+
+
+               </div>
+               <!--Grid column-->
+               <!--Grid column-->
+               
+               <!--Grid column-->
+            <!-- </div> -->
+            <!--Grid row-->
+         </div>
+         <div class="mx-auto ">
+            <!--Section: Sidebar-->
+            <section class="sticky-top " style="top: 80px;">
+               <!--Section: Ad-->
+               <!--<section class="text-center border-bottom pb-4 mb-4">
+                  <div class="bg-image hover-overlay ripple mb-4">
+                     <img
+                        src="https://via.placeholder.com/300x200"
+                        class="img-fluid" />
+                     <a href="https://mdbootstrap.com/docs/standard/" target="_blank">
+                        <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
+                     </a>
+                  </div>
+                  <a role="button" class="btn btn-primary" href="#"
+                     target="_blank">Download for free<i class="fas fa-download ms-2"></i></a>
+               </section>-->
+               <!--Section: Ad-->
+               <!--Section: Video-->
+               <section class="text-center">
+                  <h5 class="popular_title  text-center">Popular Posts</h5>
+                  <div class="popular_posts_box">
+                     
+                        {% for post in posts|slice:":6" %}
+                        <div class="popular_post">
+                           <div class="post_card">
+                              <img src="{{post.picture.url}}" class="post_img" alt="Post Thumbnail">
+                              <div class="post_card_text">
+                                 <a href="{% url 'artical' post.slug %}"><div class="popular_names">{{post.title|slice:"35"}}</div></a>
+                                 {% comment %} <div class="popular_name">{{post.descript|slice:"20"|safe}}...</div> {% endcomment %}
+                              </div>
+                           </div>
+                        </div>
+                        {% endfor %}
+                     
+                  </div>
+               </section>
+               <!--Section: Video-->
+            </section>
+            <!--Section: Sidebar-->
+         </div>
+      </main>
+      <!--Main layout-->
+   </body>
+</html>

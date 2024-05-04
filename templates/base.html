@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="overflow-x: hidden;">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>{% block title %}{% endblock title %} | BlogVerse</title>
+      <link rel="stylesheet" href="{% static 'css/Style.css' %}">
+      <link rel="stylesheet" href="{% static 'css/all.css' %}">
+      <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+      <link rel="stylesheet" href="{% static 'css/base1.css' %}">
+
+      {% block favi %}{% endblock favi %}
+
+
+      {% block css %}{% endblock css %}
+   </head>
+   <body>
+
+
+    
+      <!-- <nav class="nav" >
+          <div class="nav-menu flex-row">
+            <div class="nav-brand">
+                <a href="{% url 'homes' %}" class="text-gray text-4xl font-extrabold">ɮʟօɢʋɛʀֆɛ</a>
+                
+              </div>
+              
+              <div class="toggle-collapse">
+                  <div class="toggle-icons">
+                      <i class="fas fa-bars"></i>
+                  </div>
+              </div>
+              <div class="nav-items-ext">
+                  <ul class="nav-items">
+                      <li class="nav-link">
+                          <a href="{% url 'homes' %}">Home</a>
+                      </li>
+                      <li class="nav-link">
+                          <a href="{% url 'the_about' %}">Contact Us</a>
+                      </li>
+
+  
+                      {% if user.is_authenticated %}
+                      
+                      <li class="nav-link">
+                          <a href="{% url 'the_dashb' %}">Dashboard</a>
+                      </li>
+                      <li class="nav-link">
+                          <a href="{% url 'dynamic_option' 'your_profile' %}">Profile</a>
+                      </li>
+                      <li class="nav-link">
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </li>
+
+                      {% if user.is_staff %}
+                      <li class="nav-link">
+                        <a href="{% url 'admin:index' %}">Admin Panel</a>
+                    </li>
+                    
+                    {% endif %}
+                                       
+                  
+
+
+                      {% else %}
+                      <li class="nav-link">
+                          <a href="{% url 'the_login' %}">Authentication</a>
+                      </li>
+                      
+                      {% endif %}
+
+
+                   
+  
+
+
+                  </ul>
+              </div>
+              <div class="social text-gray">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-youtube"></i></a>
+              </div>
+          </div>
+      </nav>
+
+ -->
+
+
+
+      <div class="container">
+        <header class="site-header">
+            <div class="header__content--flow">
+                <section class="header-content--left">
+                    <a href="{% url 'homes' %}" id="brand-logo">
+                        <span class="logo-text">𝔑𝔢𝔴 ℜ𝔬𝔬𝔱𝔰<br>
+                            𝔖𝔦𝔰𝔱𝔢𝔯𝔥𝔬𝔬𝔡 𝔉𝔢𝔪𝔦𝔫𝔦𝔰𝔪 𝔬𝔣 𝔱𝔥𝔢 ℑ𝔫𝔡𝔦𝔢-𝔓𝔬𝔭
+                        </span>
+                    </a>
+                    <button class="nav-toggle">
+                        <span class="toggle--icon"></span>
+                    </button>
+                </section>
+                <section class="header-content--right">
+                    <nav class="header-nav" role="navigation">
+                        <ul class="nav__list" aria-expanded="false">
+                            <li class="list-item">
+                                <a class="nav__link" href="{% url 'homes' %}">Home</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="nav__link" href="{% url 'the_about' %}">About</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="list-item">
+                                <a class="nav__link" href="{% url 'the_dashb' %}">Dashboard</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="nav__link" href="{% url 'dynamic_option' 'your_profile' %}">Profile</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="nav__link" href="{% url 'logout' %}">Log Out</a>
+                            </li>
+                            {% if user.is_staff %}
+                            <li class="list-item">
+                                <a class="nav__link" href="{% url 'admin:index' %}">Admin</a>
+                            </li>
+                            {% endif %}
+                            {% else %}                
+                                <li class="list-item">
+                                    <a class="nav__link" href="{% url 'the_login' %}">Sign In</a>
+                                </li>                      
+                            {% endif %}
+                            <li class="list-item">
+                                {% block search %}{% endblock search %}
+                            </li>
+                        </ul>
+                    </nav>
+                </section>
+            </div>
+        </header>
+    </div>
+
+     {% block content %}
+     {% endblock %}
+
+
+
+    
+
+      <footer class="footer" class="bg-white ">
+         <div class="container" >
+             <div class="about-us" data-aos="fade-right" data-aos-delay="200">
+                 <h2>About us</h2>
+                 <p style="color : black;">
+                     BlogVerse is a plateform where you can post anything creative in your mind.You can share your ideas , tips, tricks, travel blog, food blog etc with people. You are not to meant for a paid logged in user. Just sign up and start  your journey.
+                 </p>
+             </div>
+ 
+<!-- {% comment %}                
+             <div class="instagram" data-aos="fade-left" data-aos-delay="200">
+                 <h2>Instagram</h2>
+                 <div class="flex-row">
+                     <img src="{% static 'assets/instagram/thumb-card3.png' %}" alt="insta1">
+                     <img src="{% static 'assets/instagram/thumb-card4.png' %}" alt="insta2">
+                     <img src="{% static 'assets/instagram/thumb-card5.png' %}" alt="insta3">
+                 </div>
+                 <div class="flex-row">
+                     <img src="{% static 'assets/instagram/thumb-card6.png' %}" alt="insta4">
+                     <img src="{% static 'assets/instagram/thumb-card7.png' %}" alt="insta5">
+                     <img src="{% static 'assets/instagram/thumb-card8.png' %}" alt="insta6">
+                 </div>
+             </div> 
+               {% endcomment %} -->
+ 
+             
+             <div class="follow" data-aos="fade-left" data-aos-delay="200">
+                 <h2>Follow here</h2>
+                 <p>Find us in Social</p>
+                 <div>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                 </div>
+             </div>
+         </div>
+         <div class="rights flex-row">
+             <h4 class="text-gray">
+                 Copyright ©{{curnt_year}}2023 All rights reserved | made by 
+             </h4>
+         </div>
+         <div class="move-up">
+             <span><i class="fas fa-arrow-circle-up fa-2x"></i></span>
+         </div>
+     </footer>
+   
+     <script src="{% static 'js/Jquery3.4.1.min.js' %}"></script>
+     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+     <script src="{% static 'js/aos.js' %}"></script>
+     <script src="{% static 'js/main.js' %}"></script>
+     <script src="{% static 'js/navbar.js' %}"></script>
+     
+   </body>
+ 
+</html>
