@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
-# import django_heroku
-# import dj_database_url
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = os.path.join(BASE_DIR , 'static')
@@ -112,7 +111,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles_build','static' )
-# django_heroku.settings(locals())
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
