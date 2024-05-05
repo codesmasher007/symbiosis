@@ -4,7 +4,7 @@
       {
         "src": "blogverse/wsgi.py",
         "use": "@vercel/python",
-        "config":{ "maxLambdaSizen": "15mb", "runtime":"python3.11.5" }
+        "config":{ "maxLambdaSizen": "15mb", "runtime":"python3.10" }
       },
       {
         "src":"build_files.sh",
