@@ -1,1 +1,0 @@
-web: gunicorn blogverse.wsgi:application --log-file -
