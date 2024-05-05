@@ -1,11 +1,7 @@
 { 
   "version":2,
-    "builds": [
-      {
-        "scripts": {
-          "build": " build --output public"
-        }
-      },
+    "build": [
+      
       {
         "src": "blogverse/wsgi.py",
         "use": "@vercel/python",
